@@ -17,10 +17,6 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rsvIdx;
 
-    private Date rsvDate;
-
-    private Date rsvCclDate;
-
     @ManyToOne
     @JoinColumn(name = "rsv_user_idx")
     private UserEntity userEntity;
@@ -29,8 +25,16 @@ public class Reservation {
     @JoinColumn(name = "rsv_book_isbn")
     private Book book;
 
-    private Date rsvConfirmDate;
+    @ManyToOne
+    @JoinColumn(name = "rsv_book_title")
+    public Book rsvBookTitle;
 
-    @Column(name="rsv_due_date")
+    @ManyToOne
+    @JoinColumn(name = "rsv_book_author")
+    public Book rsvBookAuthor;
+
+    private Date rsvDate;
+    private Date rsvConfirmDate;
     private Date rsvDueDate;
+    private Date rsvCclDate;
 }

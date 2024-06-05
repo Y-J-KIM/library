@@ -81,9 +81,8 @@ public class UserService_ {
         }
     }
 
-    public UserDTO findById(Long id) {
-
-        Optional<UserEntity> userEntity = userRepository.findById(id);
+    public UserDTO findById(Long idx) {
+        Optional<UserEntity> userEntity = userRepository.findById(idx);
         return userEntity.map(UserDTO::toUserDTO).orElse(null);
     }
 

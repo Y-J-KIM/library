@@ -25,27 +25,20 @@ public class AdminController1 {
 
     @GetMapping("/rents")
     public String listRents(
-            @RequestParam(value = "rentdate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate rentdate,
-            @RequestParam(value = "duedate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate duedate,
-            @RequestParam(value = "rentUserIdx", required = false, defaultValue = "0") Long idx,
-            @RequestParam(value = "rentBookIsbn", required = false) String isbn,
-/*            @RequestParam(value = "title", required = false) String title,
-           @RequestParam(value = "isbn", required = false) String isbn, */
+            @RequestParam(value = "rentdate", required = false) String rent_date,
+            @RequestParam(value = "duedate", required = false) String due_date,
+            @RequestParam(value = "rentUserIdx", required = false) Long rentUserIdx,
+            @RequestParam(value = "rentBookIsbn", required = false) String rentBookIsbn,
             Model model) {
-        List<Rent> rents = rentService.searchRents(rentdate, duedate, idx, isbn);
+        List<RentDTO> rents = adminService.searchRentsAdmin(rentBookIsbn, rentUserIdx, rent_date, due_date);
         model.addAttribute("rents", rents);
+        model.addAttribute("rentBookIsbn", rentBookIsbn);
+        model.addAttribute("rentUserIdx", rentUserIdx);
+        model.addAttribute("rentdate", rent_date);
+        model.addAttribute("duedate", due_date);
         return "admin/rental_list";
     }
 
-    //    @GetMapping("/reservations")
-    //    public String viewReservations(@RequestParam(value="rsvBookIsbn",required = false)String rsvBookIsbn,
-    //                                   @RequestParam(value="rsvUserIdx", required = false)Integer rsvUserIdx,
-    //                                   @RequestParam(value="rsvDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate rsvDate,
-    //                                   Model model){
-    //        List<Reservation> reservations = adminService.searchReservation(rsvBookIsbn, rsvUserIdx,rsvDate);
-    //        model.addAttribute("reservations", reservations);
-    //        return "reservation_list";
-    //    }
     @GetMapping("/reservations")
     public String viewReservations(@RequestParam(value = "rsvBookIsbn", required = false) String rsvBookIsbn,
                                    @RequestParam(value = "rsvUserIdx", required = false) Long rsvUserIdx,
@@ -61,24 +54,15 @@ public class AdminController1 {
         return "admin/reservation_list";
     }
 
-    //    @GetMapping("/reservation_list")
-    //    public String getReservations(Model model){
-    //        List<ReservationDTO> reservations = adminService.getAllReservations();
-    //        model.addAttribute("reservations", reservations);
-    //        return "reservation_list";
-    //    }
     @PostMapping("/confirmReservation/{rsvIdx}")
     public String confirmReservation(@PathVariable Integer rsvIdx) {
         adminService.confirmReservation(rsvIdx);
-        return "redirect:/reservations";
-        // return "reservation_list";
+        return "redirect:/admin/reservations";
     }
 
     @PostMapping("/cancelReservation/{rsvIdx}")
     public String cancelReservation(@PathVariable Integer rsvIdx) {
         adminService.cancelReservation(rsvIdx);
-        return "redirect:/reservations";
+        return "redirect:/admin/reservations";
     }
-
-
 }

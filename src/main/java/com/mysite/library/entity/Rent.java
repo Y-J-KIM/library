@@ -18,9 +18,7 @@ public class Rent {
     private Integer rentIdx;
 
     private Date rentdate;
-
     private Date duedate;
-
     private Date returndate;
 
     @ManyToOne
@@ -30,4 +28,13 @@ public class Rent {
     @ManyToOne
     @JoinColumn(name = "rent_book_isbn")
     private Book book;
+
+    @ManyToOne
+    @JoinColumn(name = "rent_book_title")
+    public Book rentBookTitle;
+
+    @ManyToOne
+    @JoinColumn(name = "rent_book_author")
+    public Book rentBookAuthor;
+
 }

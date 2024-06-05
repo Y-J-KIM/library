@@ -31,8 +31,8 @@ public class MyPageController {
     }
 
     //update: 수정 페이지 리턴
-    @GetMapping("/update/{idx}")
-    public String updateForm(@PathVariable("idx") Long idx, Model model){
+    @GetMapping("/update/{userID}")
+    public String updateForm(@PathVariable("userID") Long idx, Model model){
         UserDTO userDTO = userService_.findById(idx);
         if (userDTO != null) {
             model.addAttribute("userDTO", userDTO);

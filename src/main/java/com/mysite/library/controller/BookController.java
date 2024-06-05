@@ -85,38 +85,6 @@ public class BookController {
         return "redirect:/books/list";
     }
 
-//    @PostMapping("/update")
-//    public String updateBook(@ModelAttribute("book") BookDTO bookDTO, @RequestParam("imageFile") MultipartFile imageFile) {
-//        Optional<Book> existingBook = bookService.findById(bookDTO.getIsbn());
-//        if (existingBook.isPresent()) {
-//            Book book = existingBook.get();
-//            book.setTitle(bookDTO.getTitle());
-//            book.setAuthor(bookDTO.getAuthor());
-//            book.setPublisher(bookDTO.getPublisher());
-//            book.setDescription(bookDTO.getDescription());
-//
-//            if (!imageFile.isEmpty()) {
-//                try {
-//                    // Check if the directory exists, if not, create it
-//                    File directory = new File(uploadDir);
-//                    if (!directory.exists()) {
-//                        directory.mkdirs();
-//                    }
-//
-//                    byte[] bytes = imageFile.getBytes();
-//                    Path path = Paths.get(uploadDir + File.separator + imageFile.getOriginalFilename());
-//                    Files.write(path, bytes);
-//                    book.setImage("/uploads/" + imageFile.getOriginalFilename());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            bookService.save(book);
-//        }
-//        return "redirect:/books/list";
-//    }
-
     //도서 목록
     @GetMapping("/list")
     public String listBooks(Model model,
@@ -178,8 +146,8 @@ public class BookController {
         return "books/result";
     }
 
-//    @GetMapping("/test")
-//    public void test() throws IOException {
-//        bookAPIService.searchAndSave();
-//    }
+/*    @GetMapping("/test")
+   public void test() throws IOException {
+       bookAPIService.searchAndSave();
+   } */
 }

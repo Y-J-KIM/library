@@ -14,5 +14,6 @@ public class ReservationDTO {
     private Date rsvCclDate;
     private Date rsvConfirmDate;
     private Date rsvDueDate;
-
+    private String rsvBookTitle;
+    private String rsvBookAuthor;
 }

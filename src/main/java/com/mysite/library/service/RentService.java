@@ -107,6 +107,8 @@ public class RentService {
         rent.setBook(book);
         rent.setRentdate(Date.valueOf(LocalDate.now()));
         rent.setDuedate(Date.valueOf(LocalDate.now().plusWeeks(2)));
+        rent.setRentBookTitle(rent.getRentBookTitle());
+        rent.setRentBookAuthor(rent.getRentBookAuthor());
         rentRepo.save(rent);
 
         book.setRentAvailable(false);
@@ -126,6 +128,8 @@ public class RentService {
                 rentDTO.setRentdate(rent.getRentdate());
                 rentDTO.setDuedate(rent.getDuedate());
                 rentDTO.setReturndate(rent.getReturndate());
+                rentDTO.setRentBookTitle(rent.getBook().getTitle());
+                rentDTO.setRentBookAuthor(rent.getBook().getAuthor());
                 return rentDTO;
             }).collect(Collectors.toList());
         }
@@ -138,7 +142,7 @@ public class RentService {
 
     public List<RentDTO> getAllRents() {
         List<Rent> rents = rentRepo.findAll();
-        return rents.stream().map(this::convertToDto).collect(Collectors.toList());
+        return rents.stream().map(this :: convertToDto).collect(Collectors.toList());
     }
 
     public List<Rent> searchRents(LocalDate rentdate, LocalDate duedate, Long idx, String isbn) {
@@ -157,7 +161,9 @@ public class RentService {
                 rent.getBook().getIsbn(),
                 rent.getRentdate(),
                 rent.getDuedate(),
-                rent.getReturndate()
+                rent.getReturndate(),
+                rent.getBook().getTitle(),
+                rent.getBook().getAuthor()
         );
     }
 }

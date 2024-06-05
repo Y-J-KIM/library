@@ -2,6 +2,7 @@ package com.mysite.library.service;
 
 import com.mysite.library.entity.Book;
 import com.mysite.library.repository.BookRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,5 +56,4 @@ public class BookService {
     public Page<Book> findBooks(Pageable pageable) {
         return bookRepository.findAll(pageable);
     }
-
 }

@@ -19,4 +19,6 @@ public class RentDTO {
     private Date rentdate;
     private Date duedate;
     private Date returndate;
+    private String rentBookTitle;
+    private String rentBookAuthor;
 }

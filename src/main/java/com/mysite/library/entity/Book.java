@@ -38,7 +38,4 @@ public class Book {
 
     @CreationTimestamp
     private LocalDateTime createdAt; // 도서 등록 시간
-
-    private boolean rentedByCurrentUser;
-    private boolean reservedByCurrentUser;
 }

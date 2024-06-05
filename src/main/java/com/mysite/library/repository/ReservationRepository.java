@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
     /* boolean existsByUserEntityAndBook(UserEntity userEntity, Book book);
@@ -33,7 +34,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     //만료된 예약 찾는 메서드
     List<Reservation> findByRsvDueDateBeforeAndRsvCclDateIsNull(Date now);
 
-    List<Reservation> findByUserEntity_Idx(Long idx);
+    Optional<Reservation> findByUserEntityIdxAndBookIsbn(Long idx, String isbn);
 
     //    List<Reservation> findByRsvCclDateIsNullOrRsvBookIsbnOrRsvUserIdxOrRsvDateOrderByRsvDateDesc(
 //            String rsvBookIsbn, Integer rsvUserIdx, LocalDate rsvDate);
